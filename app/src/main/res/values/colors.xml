@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Define your color resources here -->
+    <color name="colorPrimary">#2962FF</color>
+    <color name="colorPrimaryDark">#0039CB</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="titanium">#E8E8E8</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+<color name="start_color">#CBCBCB</color>
+<color name="violet">#6C2EDA</color>
+    <color name="port_col">#8e9eab</color>
+    <color name="port_colour">#eef2f3</color>
+    <color name="start_col">#ADA996</color>
+    <color name="mid_color">#F2F2F2</color>
+    <color name="Mid_color">#DBDBDB</color>
+    <color name="end_color">#EAEAEA</color>
+    <color name="primaryColor">#1E88E5</color>
+    <color name="primaryDarkColor">#1565C0</color>
+    <color name="accentColor">#FF4081</color>
+    <color name="textColor">#FFFFFF</color>
+
+</resources>
