@@ -52,7 +52,7 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/username_edit_text"
         android:layout_width="363dp"
         android:layout_marginLeft="16dp"
         android:layout_height="wrap_content"
@@ -60,53 +60,39 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/round_textview_border"
 
-        android:drawableLeft="@drawable/ic_email"
+        android:drawableLeft="@drawable/ic_account_circle"
         android:drawablePadding="8dp"
-        android:hint="Email"
+        android:hint="Name"
         android:padding="12dp"
         android:paddingEnd="16dp"
 
         android:textSize="23dp"
         android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/password_edit_text"
 
-        android:layout_width="363dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="16dp"
-        android:background="@drawable/round_textview_border"
-        android:drawableLeft="@drawable/ic_lock"
-        android:drawablePadding="8dp"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:padding="12dp"
-        android:textSize="23dp"
-        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="372dp"
         android:layout_height="150dp"
-android:layout_marginLeft="16dp"
+        android:layout_marginLeft="16dp"
         android:gravity="center"
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/login_button"
+            android:id="@+id/save"
             android:layout_width="155dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
 
             android:backgroundTint="#BE102FD8"
-            android:text="LOGIN"
+            android:text="Save"
             android:textColor="#FFFFFF"
 
             android:textSize="20dp" />
 
         <Button
-            android:id="@+id/signup_button"
+            android:id="@+id/next"
             android:layout_width="169dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -114,15 +100,11 @@ android:layout_marginLeft="16dp"
             android:layout_weight="1"
 
             android:backgroundTint="#BE102FD8"
-
-            android:text="Sign up"
+            android:drawableRight="@drawable/arrow_next"
+            android:text="Next"
             android:textColor="@color/white"
             android:textSize="20dp" />
     </LinearLayout>
 
 
 </LinearLayout>
-
-
-
-

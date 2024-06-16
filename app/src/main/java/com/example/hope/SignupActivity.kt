@@ -8,7 +8,6 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
@@ -45,15 +44,7 @@ class SignupActivity : AppCompatActivity() {
             val confirmPassword = confirmPasswordEditText.text.toString()
 
             if (password == confirmPassword) {
-                val sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
-                val editor = sharedPreferences.edit()
-                editor.putString("Username", username)
-                editor.putString("Email", email)
-                editor.putString("Password", password)
-                editor.apply()
-
-                Toast.makeText(this, "Sign Up Successful", Toast.LENGTH_SHORT).show()
-                finish()
+                registerWithEmail(email, password, username)
             } else {
                 Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
             }
@@ -76,6 +67,25 @@ class SignupActivity : AppCompatActivity() {
         googleSignInClient = GoogleSignIn.getClient(this, gso)
     }
 
+    private fun registerWithEmail(email: String, password: String, username: String) {
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Save username in SharedPreferences
+                    val sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+                    val editor = sharedPreferences.edit()
+                    editor.putString("Username", username)
+                    editor.apply()
+
+                    Toast.makeText(this, "Sign Up Successful", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                } else {
+                    Toast.makeText(this, "Sign Up Failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
     private fun signInWithGoogle() {
         val signInIntent = googleSignInClient.signInIntent
         googleSignInClient.signOut()
@@ -85,13 +95,13 @@ class SignupActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == RC_SIGN_IN) {
+        if (requestCode == RC_SIGN_IN && resultCode == RESULT_OK) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 val account = task.getResult(ApiException::class.java)
                 firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
-                Toast.makeText(this, "Google sign-in failed: ${e.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Google Sign In Failed", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -101,8 +111,7 @@ class SignupActivity : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    val user = auth.currentUser
-                    startActivity(Intent(this, MainActivity::class.java))
+                    startActivity(Intent(this, NameActivity::class.java))
                     finish()
                 } else {
                     Toast.makeText(this, "Firebase Authentication failed.", Toast.LENGTH_LONG).show()
@@ -116,7 +125,8 @@ class SignupActivity : AppCompatActivity() {
 }
 
 
-    // Configure Google Sign-In
+
+// Configure Google Sign-In
 
 
 
