@@ -71,10 +71,11 @@ class SignupActivity : AppCompatActivity() {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Save username in SharedPreferences
+                    // Save username and email in SharedPreferences
                     val sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
                     val editor = sharedPreferences.edit()
                     editor.putString("Username", username)
+                    editor.putString("Email", email)
                     editor.apply()
 
                     Toast.makeText(this, "Sign Up Successful", Toast.LENGTH_SHORT).show()
@@ -111,6 +112,16 @@ class SignupActivity : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    // Save email in SharedPreferences
+                    val account = GoogleSignIn.getLastSignedInAccount(this)
+                    val email = account?.email
+                    if (email != null) {
+                        val sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+                        val editor = sharedPreferences.edit()
+                        editor.putString("Email", email)
+                        editor.apply()
+                    }
+
                     startActivity(Intent(this, NameActivity::class.java))
                     finish()
                 } else {

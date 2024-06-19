@@ -22,6 +22,7 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var emailTextView: TextView
     private lateinit var academicsButton: Button
     private lateinit var aboutCollegeButton: Button
+    private lateinit var eventButton: Button
     private lateinit var menuIcon: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +38,7 @@ class ProfileActivity : AppCompatActivity() {
         welcomeTextView = findViewById(R.id.welcomeTextView)
         academicsButton = findViewById(R.id.academicsButton)
         aboutCollegeButton = findViewById(R.id.aboutCollegeButton)
+        eventButton = findViewById(R.id.eventButton)
         menuIcon = findViewById(R.id.menuIcon)
 
         val usernameFromIntent = intent.getStringExtra("USERNAME")
@@ -46,20 +48,20 @@ class ProfileActivity : AppCompatActivity() {
         val emailFromPreferences = sharedPreferences.getString("Email", "user@example.com")
 
         val displayName = usernameFromIntent ?: usernameFromPreferences
-        val displayEmail = emailFromIntent ?: emailFromPreferences
+        val displayEmail = emailFromIntent ?: emailFromPreferences ?: "user@example.com"
 
         welcomeTextView.text = "Hi,\n$displayName"
         emailTextView.text = displayEmail
 
         // Load saved profile image
-        loadProfileImage()
+        loadProfileImage(displayEmail)
 
         // Set up the profile image view to allow changing the profile photo
         headerProfileImageView.setOnClickListener {
-            showImagePickerDialog()
+            showImagePickerDialog(displayEmail)
         }
         profileImageView.setOnClickListener {
-            showImagePickerDialog()
+            showImagePickerDialog(displayEmail)
         }
 
         // Set up buttons for navigating to other activities
@@ -69,6 +71,11 @@ class ProfileActivity : AppCompatActivity() {
 
         aboutCollegeButton.setOnClickListener {
             // Handle About College button click
+        }
+        eventButton.setOnClickListener {
+            // Handle About College button click
+            val intent = Intent(this, EventActivity::class.java)
+            startActivity(intent)
         }
 
         menuIcon.setOnClickListener {
@@ -95,14 +102,14 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
-    private fun showImagePickerDialog() {
+    private fun showImagePickerDialog(email: String) {
         val images = arrayOf(R.drawable.image1, R.drawable.image2, R.drawable.image3)
 
         val dialogView = layoutInflater.inflate(R.layout.dialog_image_picker, null)
         val recyclerView: RecyclerView = dialogView.findViewById(R.id.imageRecyclerView)
         recyclerView.layoutManager = GridLayoutManager(this, 2)
         recyclerView.adapter = ImageAdapter(images.toList()) { imageResId ->
-            saveProfileImage(imageResId)
+            saveProfileImage(email, imageResId)
             headerProfileImageView.setImageResource(imageResId)
             profileImageView.setImageResource(imageResId)
         }
@@ -114,20 +121,22 @@ class ProfileActivity : AppCompatActivity() {
             .show()
     }
 
-    private fun saveProfileImage(imageResId: Int) {
+    private fun saveProfileImage(email: String, imageResId: Int) {
         val sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-        editor.putInt("ProfileImage", imageResId)
+        editor.putInt("ProfileImage_$email", imageResId)
         editor.apply()
     }
 
-    private fun loadProfileImage() {
+    private fun loadProfileImage(email: String) {
         val sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
-        val imageResId = sharedPreferences.getInt("ProfileImage", R.drawable.default_profile)
+        val imageResId = sharedPreferences.getInt("ProfileImage_$email", R.drawable.default_profile)
         headerProfileImageView.setImageResource(imageResId)
         profileImageView.setImageResource(imageResId)
     }
 }
+
+
 
 
 

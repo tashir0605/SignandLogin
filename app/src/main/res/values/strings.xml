@@ -3,4 +3,7 @@
     <string name="client_id">600569694485-fceci91psjabas02pekc9bdm54344tbf.apps.googleusercontent.com</string>
     <string name="google_sign_in_failed">Google sign-in failed</string>
     <string name="firebase_auth_failed">Firebase Authentication failed</string>
+    <string name="find_amazing_events">Find Amazing events happening around you.</string>
+    <string name="search_hint">Search for an event...</string>
+    <string name="location"></string>
 </resources>

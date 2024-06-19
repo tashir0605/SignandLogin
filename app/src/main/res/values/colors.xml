@@ -9,6 +9,15 @@
     <color name="white">#FFFFFFFF</color>
 <color name="start_color">#CBCBCB</color>
 <color name="violet">#6C2EDA</color>
+    <color name="purple_200">#BB86FC</color>
+    <color name="purple_500">#6200EE</color>
+    <color name="purple_700">#3700B3</color>
+    <color name="teal_200">#03DAC5</color>
+    <color name="teal_700">#018786</color>
+    <color name="grey">#808080</color>
+    <color name="search_background">#E0E0E0</color>
+    <color name="date_background">#6200EE</color>
+
     <color name="port_col">#8e9eab</color>
     <color name="port_colour">#eef2f3</color>
     <color name="start_col">#ADA996</color>
