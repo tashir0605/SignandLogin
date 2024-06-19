@@ -12,10 +12,9 @@
         android:layout_height="104dp"
         android:background="@color/purple_500"
         android:padding="16dp"
-        android:text="Bringing People Together for Moments That Matter Most!"
+        android:text="Transforming Every Gathering into a Remarkable Experience You’ll Never Forget!"
         android:textColor="@android:color/white"
-        android:textSize="25dp"
-        android:textStyle="bold"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
