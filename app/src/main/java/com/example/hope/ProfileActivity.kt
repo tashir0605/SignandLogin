@@ -103,7 +103,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun showImagePickerDialog(email: String) {
-        val images = arrayOf(R.drawable.image2, R.drawable.image2, R.drawable.image3, R.drawable.image4, R.drawable.image5, R.drawable.image6, R.drawable.image7, R.drawable.image8, R.drawable.image9, R.drawable.image10, R.drawable.image11, R.drawable.image12, R.drawable.image13, R.drawable.image14, R.drawable.image15, R.drawable.image16, R.drawable.image17)
+        val images = arrayOf(R.drawable.image1, R.drawable.image2, R.drawable.image3, R.drawable.image4, R.drawable.image5, R.drawable.image6, R.drawable.image7, R.drawable.image8, R.drawable.image9, R.drawable.image10, R.drawable.image11, R.drawable.image12, R.drawable.image13, R.drawable.image14, R.drawable.image15, R.drawable.image16, R.drawable.image17)
 
         val dialogView = layoutInflater.inflate(R.layout.dialog_image_picker, null)
         val recyclerView: RecyclerView = dialogView.findViewById(R.id.imageRecyclerView)
